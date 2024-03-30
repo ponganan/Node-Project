@@ -12,7 +12,7 @@ app.use(express.json())
 // call default page
 app.get('/', (req, res) => {
     //response from server
-    res.send("Hello from NodeAPI install NodeMon");
+    res.send("Hello from NodeAPI install NodeMon update2");
 
 })
 
