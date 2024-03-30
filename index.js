@@ -36,7 +36,7 @@ app.post('/api/products', async (req, res) => {
 // use connect string from MongoDB Atlas 
 // ...use collection name after mongodb.net/xxxxxx?  
 // mongodb.net/NodeAPITest? 
-mongoose.connect('mongodb+srv://joeyubu:go1x2ykt@backenddb.zfdyagg.mongodb.net/NodeAPITest?retryWrites=true&w=majority&appName=BackendDB')
+mongoose.connect('mongodb+srv://joeyubu:2WCIjrN7meWVkP8I@backenddb.zfdyagg.mongodb.net/NodeAPITest?retryWrites=true&w=majority&appName=BackendDB')
     .then(() => {
         console.log('Database Connected!')
         // if Database Connected
