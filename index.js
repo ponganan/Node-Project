@@ -2,11 +2,11 @@ const express = require('express')
 // after install mongoose for MongoDB connection
 const mongoose = require('mongoose')
 // after create models we have to import
-const Product = require('./models/product.model')
+const Product = require('./models/product.model.js')
 
 const app = express()
 
-//set express can use json
+// set parse requests of content-type - application/json
 app.use(express.json())
 
 // call default page
@@ -16,14 +16,25 @@ app.get('/', (req, res) => {
 
 })
 
+//view product from mongoDB
 
-// add data to mongoseDB use async because it take a time to update to database
+app.get('/api/products', async (req, res) => {
+    try {
+        const products = await Product.find({})
+        res.status(200).json(products)
+
+    } catch (error) {
+        res.status(500).json({ message: error.message })
+    }
+
+})
+
+// add data to mongoDB use async because it take a time to update to database
 app.post('/api/products', async (req, res) => {
     try {
         // after import models(Product)
         const product = await Product.create(req.body);
         res.status(200).json(product)
-
 
     } catch (error) {
         res.status(500).json({ message: error.message })
