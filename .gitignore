@@ -1,1 +1,4 @@
+# ignore the .env file in your Node.js project
+.env
+
 node_modules
