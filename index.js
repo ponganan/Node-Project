@@ -3,18 +3,13 @@
 require('dotenv').config();
 
 const express = require('express')
-// after install mongoose for MongoDB connection
+// after install mongoose for mongoose connection
 const mongoose = require('mongoose')
-// after create models we have to import
-const Product = require('./models/product.model.js')
-//imports the getProducts function from the getProducts.js
-const getProducts = require('./controllers/getProducts');
-//imports the getProductsById function 
-const getProductById = require('./controllers/getProductById')
-//imports the createProduct function 
-const createProduct = require('./controllers/createProduct');
-//
+
+// routes for product
 const productRoutes = require('./routes/productRoutes');
+//routers for user
+const userRouters = require('./routes/userRoutes')
 
 const app = express()
 
@@ -32,9 +27,8 @@ app.get('/', (req, res) => {
 //use '/' for root directory
 app.use('/', productRoutes);
 
-
-//get product by ID from mongoDB
-//app.get('/api/product/:id', getProductById);
+//routes to userRouters
+app.use('/', userRouters);
 
 // connect MongoDB after import Mongoose
 // use connect string from MongoDB Atlas 
