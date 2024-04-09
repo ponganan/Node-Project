@@ -4,18 +4,23 @@ const ProductScheme = mongoose.Schema(
     {
         name: {
             type: String,
-            required: [true, "Please enter product name"]
+            required: [true, "Please enter a product name"],
+            minlength: 1,
+            maxlength: 50,
         },
 
         quantity: {
             type: Number,
             require: true,
-            default: 0
+            default: 0,
+            min: 0, // Minimum quantity validation
+
         },
         price: {
             type: Number,
             require: true,
-            default: 0
+            default: 0,
+            min: 0, // Minimum price validation
         },
         image: {
             type: String,

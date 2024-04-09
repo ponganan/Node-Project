@@ -7,6 +7,12 @@ const express = require('express')
 const mongoose = require('mongoose')
 // after create models we have to import
 const Product = require('./models/product.model.js')
+//imports the getProducts function from the getProducts.js
+const getProducts = require('./controllers/getProducts');
+//imports the getProductsById function 
+const getProductById = require('./controllers/getProductById')
+//imports the createProduct function 
+const createProduct = require('./controllers/createProduct');
 
 const app = express()
 
@@ -17,48 +23,15 @@ app.use(express.json())
 app.get('/', (req, res) => {
     //response from server
     res.send("Hello from NodeAPI install NodeMon update time : 23.34");
-
+    //res.redirect('https://www.ponganan.com');
 })
 
-//view product from mongoDB
-
-app.get('/api/products/', async (req, res) => {
-    try {
-        const products = await Product.find({})
-        res.status(200).json(products)
-
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-
-})
-
-////get product by ID from mongoDB
-app.get('/api/product/:id', async (req, res) => {
-    try {
-        const { id } = req.params;
-        const product = await Product.findById(id);
-        res.status(200).json(product)
-
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-    }
-
-})
-
+//view all product from mongoDB
+app.get('/api/products/', getProducts);
+//get product by ID from mongoDB
+app.get('/api/product/:id', getProductById);
 // add data to mongoDB use async because it take a time to update to database
-app.post('/api/products', async (req, res) => {
-    try {
-        // after import models(Product)
-        const product = await Product.create(req.body);
-        res.status(200).json(product)
-
-    } catch (error) {
-        res.status(500).json({ message: error.message })
-
-    }
-
-})
+app.post('/api/products/', createProduct);
 
 // connect MongoDB after import Mongoose
 // use connect string from MongoDB Atlas 
