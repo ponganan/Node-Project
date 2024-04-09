@@ -13,6 +13,8 @@ const getProducts = require('./controllers/getProducts');
 const getProductById = require('./controllers/getProductById')
 //imports the createProduct function 
 const createProduct = require('./controllers/createProduct');
+//
+const productRoutes = require('./routes/productRoutes');
 
 const app = express()
 
@@ -26,12 +28,13 @@ app.get('/', (req, res) => {
     //res.redirect('https://www.ponganan.com');
 })
 
-//view all product from mongoDB
-app.get('/api/products/', getProducts);
+//can use both GET and POST methods within the same route
+//use '/' for root directory
+app.use('/', productRoutes);
+
+
 //get product by ID from mongoDB
-app.get('/api/product/:id', getProductById);
-// add data to mongoDB use async because it take a time to update to database
-app.post('/api/products/', createProduct);
+//app.get('/api/product/:id', getProductById);
 
 // connect MongoDB after import Mongoose
 // use connect string from MongoDB Atlas 

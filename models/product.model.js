@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const ProductScheme = mongoose.Schema(
+const productScheme = mongoose.Schema(
     {
         name: {
             type: String,
@@ -33,7 +33,7 @@ const ProductScheme = mongoose.Schema(
 )
 
 // allow mongodb to use schema
-const Product = mongoose.model("Product", ProductScheme);
+const Product = mongoose.model("Product", productScheme);
 
 // have to export
 module.exports = Product;

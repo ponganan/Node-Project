@@ -2,10 +2,7 @@ const Product = require('../models/product.model');
 
 async function createProduct(req, res) {
     try {
-        const newProduct = new Product(req.body); // Create a new product object
-
-        // Optional data validation (consider using a library like Joi)
-        // You can validate the required fields and data types here
+        const newProduct = new Product(req.body);
 
         const savedProduct = await newProduct.save(); // Save the new product to MongoDB
 
