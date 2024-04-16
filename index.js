@@ -5,11 +5,15 @@ require('dotenv').config();
 const express = require('express')
 // after install mongoose for mongoose connection
 const mongoose = require('mongoose')
+//
+const bcrypt = require('bcrypt');
 
 // routes for product
-const productRoutes = require('./routes/productRoutes');
+const productRoutes = require('./routes/productRoutes')
 //routers for user
 const userRouters = require('./routes/userRoutes')
+// routers for login
+const register = require('./routes/auth.routes')
 
 const app = express()
 
@@ -29,6 +33,9 @@ app.use('/', productRoutes);
 
 //routes to userRouters
 app.use('/', userRouters);
+
+//routes for Login
+app.use('/', register);
 
 // connect MongoDB after import Mongoose
 // use connect string from MongoDB Atlas 
@@ -54,4 +61,5 @@ mongoose.connect(connectionString)
     .catch(err => {
         console.log('Connection Failed!')
         console.error(err)
+        process.exit(1);
     });
