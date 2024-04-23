@@ -6,7 +6,7 @@ const express = require('express')
 // after install mongoose for mongoose connection
 const mongoose = require('mongoose')
 //
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 // routes for product
 const productRoutes = require('./routes/productRoutes')
@@ -34,7 +34,7 @@ app.use('/', productRoutes);
 //routes to userRouters
 app.use('/', userRouters);
 
-//routes for Login
+//routes for Login and register
 app.use('/', register);
 
 // connect MongoDB after import Mongoose
