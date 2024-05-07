@@ -5,6 +5,8 @@ require('dotenv').config();
 const express = require('express')
 // after install mongoose for mongoose connection
 const mongoose = require('mongoose')
+
+const cors = require('cors');
 //
 //const bcrypt = require('bcrypt');
 
@@ -16,6 +18,8 @@ const userRouters = require('./routes/userRoutes')
 const register = require('./routes/auth.routes')
 
 const app = express()
+// Configure CORS middleware
+app.use(cors());  // Apply CORS middleware to all routes
 
 // set parse requests of content-type - application/json
 app.use(express.json())

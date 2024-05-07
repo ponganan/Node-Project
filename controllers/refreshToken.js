@@ -1,4 +1,5 @@
 const jwt = require('jsonwebtoken');
+const { generateRefreshToken, generateAccessToken } = require('../utils/utils');
 
 async function refreshToken(req, res) {
     const refreshToken = req.body.refreshToken;
