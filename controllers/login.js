@@ -35,11 +35,22 @@ async function login(req, res) {
         // Generate JWT token (consider using a stronger secret key in production)
         // const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '3600s' }); // Token expires in 1 hour
 
+
+
         // Set HttpOnly cookies with expiry times
-        res.setHeader('Set-Cookie', [
-            `accessToken=${accessToken}; HttpOnly; Max-Age=3600; Path=/`,
-            `refreshToken=${refreshToken}; HttpOnly; Max-Age=86400; Path=/`
-        ]);
+
+        //  res.setHeader('Set-Cookie', [
+        // set 1 hour Adding the secure Flag to use HTTPS
+
+        //  `accessToken=${accessToken}; HttpOnly; Secure; Max-Age=3600; Path=/`,
+
+        // set 1 day Adding the secure Flag to use HTTPS
+        //`refreshToken=${refreshToken}; HttpOnly; Secure; Max-Age=86400; Path=/`         
+        //  ]);
+
+        // Set HttpOnly cookies with expiry times and secure flag
+        res.cookie('accessToken', accessToken, { httpOnly: true, secure: false, maxAge: 60, path: '/' }); // 3600 seconds = 1 min
+        res.cookie('refreshToken', refreshToken, { httpOnly: true, secure: false, maxAge: 86400, path: '/' }); // 86400 seconds = 1 day
 
         // Send response with both tokens
         res.json({ message: 'Login successful', accessToken, refreshToken });

@@ -26,7 +26,8 @@ function generateAccessToken(userId) {
     const accessTokenSecret = process.env.JWT_SECRET;
 
     // Set appropriate expiration time for access tokens (shorter than refresh token)
-    const options = { expiresIn: '3600s' }; // Example: Access token expires in 1 hour
+    // const options = { expiresIn: '3600s' }; // Example: Access token expires in 1 hour
+    const options = { expiresIn: '60s' };
 
     // Generate the access token using JWT
     const accessToken = jwt.sign(payload, accessTokenSecret, options);

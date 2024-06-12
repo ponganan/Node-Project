@@ -16,7 +16,11 @@ async function refreshToken(req, res) {
         // Optionally generate new refresh token
         const newRefreshToken = generateRefreshToken(userId);
 
-        res.json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
+        // Set HttpOnly cookies with expiry times and secure flag
+        res.cookie('accessToken', newAccessToken, { httpOnly: true, secure: false, maxAge: 60, path: '/' }); // 3600 seconds = 1 min
+        res.cookie('refreshToken', newRefreshToken, { httpOnly: true, secure: false, maxAge: 86400, path: '/' }); // 86400 seconds = 1 day
+
+        res.status(200).json({ accessToken: newAccessToken, refreshToken: newRefreshToken });
     } catch (err) {
         return res.status(401).json({ message: 'Invalid refresh token' });
     }
